@@ -1,0 +1,57 @@
+:root {
+    /* Light Theme (default) - Blue theme with dull white */
+    --bg: #f4f4f4;
+    --card: #FFFFFF;
+    --sidebar: #FFFFFF;
+    --border: #E0E8F5;
+    --textPrimary: #1A1F2E;
+    --textSecondary: #4A5568;
+    --textMuted: #718096;
+    --accent: #077cfe;
+
+    /* Border radius variables - for consistency */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-2xl: 40px;
+    --radius-full: 50%;
+
+    /* Button padding variables */
+    --btn-padding-x: 14px;
+    --btn-padding-y: 16px;
+}
+
+[data-theme="dark"] {
+    /* Dark Theme - Blue theme with dark base */
+    --bg: #03001C;
+    --sidebar: #0A0526;
+    --card: #0F0833;
+    --border: #1A1240;
+    --textPrimary: #F7FAFC;
+    --textSecondary: #CBD5E0;
+    --textMuted: #A0AEC0;
+    --accent: #077cfe;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bg);
+    color: var(--textPrimary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#root {
+    min-height: 100vh;
+    width: 100%;
+}

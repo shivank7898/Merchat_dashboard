@@ -1,0 +1,272 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.searchFilterRow {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.searchFilterRow> :first-child {
+    flex-shrink: 0;
+}
+
+
+.searchFilterRowContent {
+    display: flex;
+    align-items: center;
+    /* flex-wrap: wrap; */
+    gap: 16px;
+}
+
+.searchCard {
+    padding: 0;
+    max-width: 300px;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 16px 16px;
+    border: none;
+    border-radius: var(--radius-xl);
+    background-color: transparent;
+    color: var(--textPrimary);
+    font-size: 14px;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+    outline: none;
+}
+
+.searchInput::placeholder {
+    color: var(--textMuted);
+}
+
+.sortableHeader {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.sortableHeader:hover {
+    color: var(--accent);
+}
+
+.createButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.createButton:hover {
+    opacity: 0.9;
+}
+
+.createButton:active {
+    transform: scale(0.98);
+}
+
+.tableContainer {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tableWrapper {
+    width: 100%;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    text-align: center;
+    padding: 14px 16px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--textSecondary);
+    border-bottom: 1px solid var(--border);
+}
+
+.table td {
+    text-align: center;
+    padding: 16px;
+    font-size: 14px;
+    color: var(--textPrimary);
+    border-bottom: 1px solid var(--border);
+}
+
+.table tbody tr:hover {
+    background-color: var(--bg);
+}
+
+.merchantName {
+    font-weight: 500;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.status.active {
+    background-color: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+}
+
+.status.paused {
+    background-color: rgba(251, 191, 36, 0.1);
+    color: #fbbf24;
+}
+
+.status.blocked {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.risk {
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.risk.low {
+    background-color: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+}
+
+.risk.medium {
+    background-color: rgba(251, 191, 36, 0.1);
+    color: #fbbf24;
+}
+
+.risk.high {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.actionsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.actionButton {
+    padding: 6px;
+    background-color: transparent;
+    border: none;
+    color: var(--textSecondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+}
+
+.actionButton:hover {
+    background-color: var(--bg);
+    color: var(--accent);
+}
+
+@media (max-width: 1024px) {
+    .container {
+        gap: 14px;
+    }
+
+    /* .searchFilterRow {
+        gap: 12px;
+    }
+
+    .searchFilterRow> :last-child {
+        max-width: 250px;
+    } */
+}
+
+@media (max-width: 768px) {
+    .container {
+        gap: 12px;
+        height: calc(100vh - 120px);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .searchFilterRow {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        flex-shrink: 0;
+    }
+
+    .searchFilterRowContent {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .searchCard {
+        max-width: 100%;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .createButton {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 24px;
+    }
+
+    .tableWrapper {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    .tableContainer {
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table {
+        min-width: 800px;
+    }
+
+    .actionsContainer {
+        gap: 8px;
+    }
+
+    .actionButton {
+        padding: 4px;
+    }
+}

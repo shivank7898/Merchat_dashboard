@@ -1,0 +1,61 @@
+.statusButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-2xl);
+    background-color: var(--bg);
+    color: var(--textSecondary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: capitalize;
+    font-family: inherit;
+}
+
+.statusButton:hover:not(:disabled) {
+    background-color: var(--bg);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.statusButton:disabled {
+    cursor: default;
+}
+
+.statusButton.active {
+    background-color: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.statusButton.active:hover:not(:disabled) {
+    background-color: var(--accent);
+    color: white;
+    opacity: 0.9;
+}
+
+.statusButton.active:disabled {
+    opacity: 1;
+}
+
+.indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background-color: currentColor;
+    opacity: 0.6;
+    flex-shrink: 0;
+}
+
+.statusButton.active .indicator {
+    opacity: 1;
+    background-color: white;
+}
+
+.label {
+    white-space: nowrap;
+}
+

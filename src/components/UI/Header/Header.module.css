@@ -1,0 +1,179 @@
+.header {
+  position: sticky;
+  top: 24px;
+  z-index: 100;
+  background-color: var(--card);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+.hamburgerBtn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--textPrimary);
+  padding: 8px;
+  border-radius: var(--radius-md);
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.hamburgerBtn:hover {
+  background-color: var(--bg);
+}
+
+.logoContainer {
+  display: none;
+  flex-shrink: 0;
+}
+
+.logo {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--textPrimary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.mobileNav {
+  display: none;
+  max-height: 0;
+  overflow: hidden;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+  transition: max-height 0.3s ease, margin-top 0.3s ease, padding-top 0.3s ease, border-top 0.3s ease;
+}
+
+.mobileNav.menuOpen {
+  max-height: 500px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.mobileMenuList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.mobileMenuItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  color: var(--textSecondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.mobileMenuItem:hover {
+  background-color: var(--bg);
+  color: var(--textPrimary);
+}
+
+.mobileMenuItem.active {
+  background-color: var(--bg);
+  color: var(--accent);
+}
+
+@media (max-width: 1024px) {
+  .header {
+    padding: 20px;
+    margin-bottom: 20px;
+    top: 16px;
+  }
+
+  .sidebar {
+    top: 16px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .leftSection {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 16px;
+    margin-bottom: 16px;
+    top: 12px;
+  }
+
+  .sidebar {
+    top: 12px;
+  }
+
+  .hamburgerBtn {
+    display: flex;
+  }
+
+  .logoContainer {
+    display: block;
+  }
+
+  .title {
+    display: none;
+  }
+
+  .mobileNav {
+    display: block;
+  }
+
+  .leftSection {
+    gap: 12px;
+  }
+
+  .logo {
+    height: 28px;
+  }
+
+  .actions {
+    gap: 8px;
+  }
+}

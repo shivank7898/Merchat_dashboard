@@ -1,0 +1,28 @@
+.detailSection {
+    margin-bottom: 24px;
+}
+
+.detailRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.detailRow:last-child {
+    border-bottom: none;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--textSecondary);
+}
+
+.value {
+    font-size: 14px;
+    color: var(--textPrimary);
+    font-weight: 500;
+}
+

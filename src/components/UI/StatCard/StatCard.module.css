@@ -1,0 +1,80 @@
+.statCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.statCard.clickable {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.statCard.clickable:hover {
+  transform: translateY(-2px);
+}
+
+.statCard.clickable:active {
+  transform: translateY(0);
+}
+
+.activeCard {
+  border: 2px solid var(--accent);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--textSecondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--textMuted);
+  flex-shrink: 0;
+}
+
+.value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--textPrimary);
+  line-height: 1.2;
+}
+
+.trend {
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.trend.positive {
+  color: #10b981;
+}
+
+.trend.negative {
+  color: #ef4444;
+}
+
+@media (max-width: 768px) {
+  .value {
+    font-size: 24px;
+  }
+
+  .title {
+    font-size: 13px;
+  }
+}
+

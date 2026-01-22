@@ -1,0 +1,158 @@
+.tableCard {
+    overflow: auto;
+}
+
+.tableWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-width: 1032px;
+}
+
+.tableContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+    min-height: 0;
+}
+
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+.table thead {
+    display: block;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--card);
+    border-bottom: 1px solid var(--border);
+}
+
+.table thead tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table tbody {
+    display: block;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
+}
+
+.table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table th {
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--textMuted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    background-color: var(--card);
+}
+
+.table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: var(--bg);
+}
+
+.table td {
+    padding: 16px;
+    font-size: 14px;
+    color: var(--textSecondary);
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.skeleton {
+    height: 16px;
+    background: linear-gradient(90deg,
+            var(--bg) 25%,
+            var(--border) 50%,
+            var(--bg) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s ease-in-out infinite;
+    border-radius: var(--radius-sm);
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.emptyState {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    padding: 40px;
+}
+
+.emptyMessage {
+    font-size: 16px;
+    color: var(--textMuted);
+    text-align: center;
+    margin: 0;
+}
+
+.loadMoreCell {
+    padding: 16px;
+    text-align: center;
+}
+
+.loadingMore {
+    display: flex;
+    justify-content: center;
+    padding: 8px 0;
+}
+
+.loadMoreIndicator {
+    font-size: 14px;
+    color: var(--textMuted);
+    padding: 8px 0;
+}
+
+@media (max-width: 768px) {
+    .tableContainer {
+        overflow-x: auto;
+    }
+
+    .table {
+        min-width: 600px;
+    }
+
+    .table th,
+    .table td {
+        padding: 12px 8px;
+        font-size: 13px;
+    }
+}
