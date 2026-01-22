@@ -23,7 +23,6 @@ A modern, responsive merchant management dashboard built with React, TypeScript,
 - Recharts (Data visualization)
 - CSS Modules (Styling)
 - Lucide React (Icons)
-- React Intersection Observer (Infinite scroll)
 
 
 ## How to Run the Project
