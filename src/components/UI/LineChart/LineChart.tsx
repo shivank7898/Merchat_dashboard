@@ -31,7 +31,6 @@ export default function LineChart({
   const gradientId = `gradient-${title.replace(/\s+/g, "-")}`;
   const finalGradientColor = color;
 
-  // Calculate Y-axis domain if not provided
   const values = data.map((d) => d.value);
   const minValue = Math.min(...values);
   const maxValue = Math.max(...values);

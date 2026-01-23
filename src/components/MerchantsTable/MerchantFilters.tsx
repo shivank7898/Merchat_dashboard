@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ChevronRight, ChevronLeft } from "lucide-react";
-import Card from "../Card/Card";
-import type { MerchantStatus, RiskLevel } from "../../../configs/merchants";
+import Card from "../UI/Card/Card";
+import type { MerchantStatus, RiskLevel } from "../../configs/merchants";
 import styles from "./MerchantFilters.module.css";
 
 interface MerchantFiltersProps {

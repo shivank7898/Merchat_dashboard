@@ -1,5 +1,5 @@
-import type { Merchant } from "../../../configs/merchants";
-import { formatCurrency } from "../../../utils/formatters";
+import type { Merchant } from "../../configs/merchants";
+import { formatCurrency } from "../../utils/formatters";
 import styles from "./MerchantView.module.css";
 
 interface MerchantViewProps {

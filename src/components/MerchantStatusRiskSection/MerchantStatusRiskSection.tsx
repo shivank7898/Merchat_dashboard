@@ -1,5 +1,5 @@
-import type { MerchantStatus, RiskLevel } from "../../../configs/merchants";
-import StatusButton from "../StatusButton/StatusButton";
+import type { MerchantStatus, RiskLevel } from "../../configs/merchants";
+import StatusButton from "../UI/StatusButton/StatusButton";
 import styles from "./MerchantStatusRiskSection.module.css";
 
 interface MerchantStatusRiskSectionProps {

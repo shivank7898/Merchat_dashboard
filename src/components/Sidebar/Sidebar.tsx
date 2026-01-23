@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { menuItems } from "../../../configs";
-import type { MenuItem } from "../../../configs/menuItems";
+import { menuItems } from "../../configs";
+import type { MenuItem } from "../../configs/menuItems";
 import styles from "./Sidebar.module.css";
-import { logo } from "../../../assets";
+import { logo } from "../../assets";
 
 export default function Sidebar() {
   return (
@@ -32,9 +32,6 @@ export default function Sidebar() {
           })}
         </ul>
       </nav>
-      {/* <div className={styles.themeToggleContainer}>
-        <ThemeToggle theme={theme} onToggle={onThemeToggle} />
-      </div> */}
     </aside>
   );
 }

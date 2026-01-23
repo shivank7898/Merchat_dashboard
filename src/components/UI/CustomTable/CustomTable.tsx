@@ -33,31 +33,36 @@ export default function CustomTable<T = any>({
     const [isLoadingMore, setIsLoadingMore] = useState(false);
     const tbodyRef = useRef<HTMLTableSectionElement>(null);
     const loadingRef = useRef(false);
+    const onLoadMoreRef = useRef(onLoadMore);
+    const loadingRefValue = useRef(loading);
+    const hasMoreRef = useRef(hasMore);
 
-    // Handle scroll event for infinite loading
+    useEffect(() => {
+        onLoadMoreRef.current = onLoadMore;
+        loadingRefValue.current = loading;
+        hasMoreRef.current = hasMore;
+    }, [onLoadMore, loading, hasMore]);
+
     const handleScroll = useCallback(() => {
-        if (!tbodyRef.current || loading || !hasMore || loadingRef.current || !onLoadMore) {
+        if (!tbodyRef.current || loadingRefValue.current || !hasMoreRef.current || loadingRef.current || !onLoadMoreRef.current) {
             return;
         }
 
         const { scrollTop, scrollHeight, clientHeight } = tbodyRef.current;
 
-        // Check if content is actually scrollable
         if (scrollHeight <= clientHeight) {
             return;
         }
 
-        // Load more when scrolled to 80% of content
         const scrollPercentage = (scrollTop + clientHeight) / scrollHeight;
 
         if (scrollPercentage >= 0.8) {
             loadingRef.current = true;
             setIsLoadingMore(true);
-            onLoadMore();
+            onLoadMoreRef.current();
         }
-    }, [loading, hasMore, onLoadMore]);
+    }, []);
 
-    // Reset loading state when data changes
     useEffect(() => {
         if (!loading) {
             setIsLoadingMore(false);
@@ -65,7 +70,6 @@ export default function CustomTable<T = any>({
         }
     }, [loading, data.length]);
 
-    // Attach scroll listener
     useEffect(() => {
         const tbody = tbodyRef.current;
         if (!tbody) return;
@@ -75,21 +79,19 @@ export default function CustomTable<T = any>({
         return () => {
             tbody.removeEventListener('scroll', handleScroll);
         };
-    }, [handleScroll]);
+    }, []);
 
-    // Check if we need to load more on mount (if content doesn't fill container)
     useEffect(() => {
-        if (!tbodyRef.current || !hasMore || loading || !onLoadMore) return;
+        if (!tbodyRef.current || !hasMoreRef.current || loadingRefValue.current || !onLoadMoreRef.current) return;
 
         const { scrollHeight, clientHeight } = tbodyRef.current;
 
-        // If content doesn't fill the container, load more
         if (scrollHeight <= clientHeight && data.length > 0 && !loadingRef.current) {
             loadingRef.current = true;
             setIsLoadingMore(true);
-            onLoadMore();
+            onLoadMoreRef.current();
         }
-    }, [data.length, hasMore, loading, onLoadMore]);
+    }, [data.length]);
 
     const renderCell = useCallback(
         (column: TableColumn<T>, row: T, index: number) => {

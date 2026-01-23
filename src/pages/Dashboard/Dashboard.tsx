@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { DollarSign, TrendingUp, Users } from "lucide-react";
-import StatCard from "../../components/UI/StatCard/StatCard";
+import StatCard from "../../components/StatCard/StatCard";
 import LineChart from "../../components/UI/LineChart/LineChart";
 import { useMerchantStore } from "../../store/merchantStore";
 import { calculateDashboardStats } from "../../utils/dashboardCalculations";
@@ -13,7 +13,7 @@ import {
 import styles from "./Dashboard.module.css";
 
 export default function Dashboard() {
-  const merchants = useMerchantStore((state) => state.merchants);
+  const { merchants } = useMerchantStore();
   const [selectedChart, setSelectedChart] = useState<ChartType>("volume");
   const stats = useMemo(() => calculateDashboardStats(merchants), [merchants]);
   const chartData = useMemo(

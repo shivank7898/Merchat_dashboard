@@ -16,7 +16,6 @@ export interface Merchant {
     monthlyVolume: number;
     chargebackRatio: number;
     riskLevel: RiskLevel;
-    // Fields for dashboard charts
     volume: number;
     successRate: number;
     transactions: number;

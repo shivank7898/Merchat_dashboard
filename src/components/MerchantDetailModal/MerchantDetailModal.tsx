@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { X, AlertTriangle } from "lucide-react";
-import { useMerchantStore } from "../../../store/merchantStore";
-import type { MerchantStatus, RiskLevel, Merchant } from "../../../configs/merchants";
+import { useMerchantStore } from "../../store/merchantStore";
+import type { MerchantStatus, RiskLevel, Merchant } from "../../configs/merchants";
 import MerchantForm, { type MerchantFormData } from "../MerchantForm/MerchantForm";
 import MerchantView from "../MerchantView/MerchantView";
 import MerchantStatusRiskSection from "../MerchantStatusRiskSection/MerchantStatusRiskSection";
-import Card from "../Card/Card";
+import Card from "../UI/Card/Card";
 import styles from "./MerchantDetailModal.module.css";
 
 interface MerchantDetailModalProps {
@@ -52,7 +52,6 @@ export default function MerchantDetailModal({
 
     const handleStatusChange = (newStatus: MerchantStatus) => {
         if (newStatus === "active" && currentRiskLevel === "high") {
-            // Show confirmation for high risk + active status
             setPendingStatus(newStatus);
             setShowConfirmation(true);
         } else {
@@ -80,7 +79,6 @@ export default function MerchantDetailModal({
 
     const handleSave = () => {
         if (currentMode === "view") {
-            // View mode: only update status and risk level
             if (merchant?.id && status && riskLevel) {
                 updateMerchant(merchant.id, {
                     status: status as MerchantStatus,
@@ -89,12 +87,10 @@ export default function MerchantDetailModal({
                 onClose();
             }
         } else {
-            // Edit or Create mode: get form data and save
             const formData = formRef.current?.getFormData();
             if (!formData) return;
 
             if (currentMode === "create") {
-                // Create new merchant
                 const newMerchant: Merchant = {
                     id: `merchant-${Date.now()}`,
                     name: formData.name,
@@ -103,7 +99,6 @@ export default function MerchantDetailModal({
                     monthlyVolume: formData.monthlyVolume,
                     chargebackRatio: formData.chargebackRatio ?? 0,
                     riskLevel: riskLevel as RiskLevel,
-                    // Default values for dashboard fields
                     volume: formData.monthlyVolume,
                     successRate: 95,
                     transactions: Math.floor(formData.monthlyVolume / 100),
@@ -113,7 +108,6 @@ export default function MerchantDetailModal({
                 addMerchant(newMerchant);
                 onClose();
             } else if (currentMode === "edit" && merchant?.id) {
-                // Update existing merchant
                 updateMerchant(merchant.id, {
                     name: formData.name,
                     country: formData.country,
@@ -127,19 +121,16 @@ export default function MerchantDetailModal({
         }
     };
 
-    // Check if save button should be enabled
     const canSave = currentMode === "view"
         ? hasChanges
         : isFormValid;
 
-    // Get button text based on mode
     const getButtonText = () => {
         if (currentMode === "create") return "Create";
         if (currentMode === "edit") return "Update";
         return "Save";
     };
 
-    // If no merchant found and not in create mode, don't render
     if (!merchant && currentMode !== "create") return null;
 
     return (

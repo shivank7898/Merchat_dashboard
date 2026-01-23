@@ -1,5 +1,4 @@
 :root {
-    /* Light Theme (default) - Blue theme with dull white */
     --bg: #f4f4f4;
     --card: #FFFFFF;
     --sidebar: #FFFFFF;
@@ -9,7 +8,6 @@
     --textMuted: #718096;
     --accent: #077cfe;
 
-    /* Border radius variables - for consistency */
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
@@ -17,13 +15,11 @@
     --radius-2xl: 40px;
     --radius-full: 50%;
 
-    /* Button padding variables */
     --btn-padding-x: 14px;
     --btn-padding-y: 16px;
 }
 
 [data-theme="dark"] {
-    /* Dark Theme - Blue theme with dark base */
     --bg: #03001C;
     --sidebar: #0A0526;
     --card: #0F0833;

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import type { Merchant } from "../../../configs/merchants";
+import type { Merchant } from "../../configs/merchants";
 import styles from "./MerchantForm.module.css";
 
 const merchantSchema = z.object({
@@ -48,8 +48,7 @@ export default function MerchantForm({
         mode: "onChange",
     });
 
-    // Expose form data to parent via ref
-    React.useEffect(() => {
+    useEffect(() => {
         if (formRef) {
             (formRef as any).current = {
                 getFormData: () => {
@@ -63,11 +62,10 @@ export default function MerchantForm({
             };
         }
 
-        // Notify parent of validation changes
         if (onFormChange) {
             onFormChange(isValid);
         }
-    }, [formRef, getValues, isValid, onFormChange]);
+    }, [formRef, isValid]);
 
     return (
         <div className={styles.form}>

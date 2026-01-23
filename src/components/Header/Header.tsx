@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useLocation, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import menuItems from "../../../configs/menuItems";
-import { logo } from "../../../assets";
+import menuItems from "../../configs/menuItems";
+import { logo } from "../../assets";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
-import type { MenuItem } from "../../../configs/menuItems";
+import type { MenuItem } from "../../configs/menuItems";
 import styles from "./Header.module.css";
 
 interface HeaderProps {

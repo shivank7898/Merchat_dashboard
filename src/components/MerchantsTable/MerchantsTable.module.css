@@ -22,7 +22,6 @@
 .searchFilterRowContent {
     display: flex;
     align-items: center;
-    /* flex-wrap: wrap; */
     gap: 16px;
 }
 
@@ -202,14 +201,6 @@
     .container {
         gap: 14px;
     }
-
-    /* .searchFilterRow {
-        gap: 12px;
-    }
-
-    .searchFilterRow> :last-child {
-        max-width: 250px;
-    } */
 }
 
 @media (max-width: 768px) {

@@ -1,11 +1,11 @@
-import { useState, useCallback, useEffect, useMemo } from "react";
-import CustomTable, { type TableColumn } from "../CustomTable/CustomTable";
+import { useState, useCallback, useEffect, useMemo, useRef } from "react";
+import CustomTable, { type TableColumn } from "../UI/CustomTable/CustomTable";
 import MerchantFilters from "./MerchantFilters";
 import MerchantDetailModal from "../MerchantDetailModal/MerchantDetailModal";
-import Card from "../Card/Card";
-import { useMerchantStore } from "../../../store/merchantStore";
-import { formatCurrency } from "../../../utils/formatters";
-import type { Merchant, MerchantStatus, RiskLevel } from "../../../configs";
+import Card from "../UI/Card/Card";
+import { useMerchantStore } from "../../store/merchantStore";
+import { formatCurrency } from "../../utils/formatters";
+import type { Merchant, MerchantStatus, RiskLevel } from "../../configs";
 import { ArrowUp, ArrowDown, Pencil, Eye, Plus } from "lucide-react";
 import styles from "./MerchantsTable.module.css";
 
@@ -13,26 +13,24 @@ type SortField = "monthlyVolume" | "chargebackRatio" | null;
 type SortDirection = "asc" | "desc";
 
 export default function MerchantsTable() {
-    const merchants = useMerchantStore((state) => state.merchants);
+    const { merchants } = useMerchantStore();
     const [displayedMerchants, setDisplayedMerchants] = useState<Merchant[]>(
         merchants.slice(0, 2)
     );
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(merchants.length > 10);
     const [selectedMerchantId, setSelectedMerchantId] = useState<string | null>(null);
+    const isLoadingRef = useRef(false);
 
-    // Search and filter states
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedStatuses, setSelectedStatuses] = useState<MerchantStatus[]>([]);
     const [selectedRiskLevels, setSelectedRiskLevels] = useState<RiskLevel[]>([]);
     const [sortField, setSortField] = useState<SortField>(null);
     const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
 
-    // Filter and sort merchants
     const filteredAndSortedMerchants = useMemo(() => {
         let result = [...merchants];
 
-        // Apply search filter
         if (searchQuery.trim()) {
             const query = searchQuery.toLowerCase().trim();
             result = result.filter((merchant) =>
@@ -40,21 +38,18 @@ export default function MerchantsTable() {
             );
         }
 
-        // Apply status filter
         if (selectedStatuses.length > 0) {
             result = result.filter((merchant) =>
                 selectedStatuses.includes(merchant.status)
             );
         }
 
-        // Apply risk level filter
         if (selectedRiskLevels.length > 0) {
             result = result.filter((merchant) =>
                 selectedRiskLevels.includes(merchant.riskLevel)
             );
         }
 
-        // Apply sorting
         if (sortField) {
             result.sort((a, b) => {
                 const aValue = a[sortField];
@@ -67,7 +62,6 @@ export default function MerchantsTable() {
         return result;
     }, [merchants, searchQuery, selectedStatuses, selectedRiskLevels, sortField, sortDirection]);
 
-    // Update displayed merchants when filtered/sorted merchants change
     useEffect(() => {
         if (filteredAndSortedMerchants.length > 0) {
             const newDisplayed = filteredAndSortedMerchants.slice(0, 10);
@@ -80,22 +74,28 @@ export default function MerchantsTable() {
     }, [filteredAndSortedMerchants]);
 
     const handleLoadMore = useCallback(() => {
-        if (loading || !hasMore) return;
+        if (loading || !hasMore || isLoadingRef.current) return;
 
+        isLoadingRef.current = true;
         setLoading(true);
         setTimeout(() => {
-            const currentLength = displayedMerchants.length;
-            const nextBatch = filteredAndSortedMerchants.slice(currentLength, currentLength + 10);
+            setDisplayedMerchants((prev) => {
+                const currentLength = prev.length;
+                const nextBatch = filteredAndSortedMerchants.slice(currentLength, currentLength + 10);
 
-            if (nextBatch.length > 0) {
-                setDisplayedMerchants((prev) => [...prev, ...nextBatch]);
-                setHasMore(currentLength + nextBatch.length < filteredAndSortedMerchants.length);
-            } else {
-                setHasMore(false);
-            }
+                if (nextBatch.length > 0) {
+                    const newLength = currentLength + nextBatch.length;
+                    setHasMore(newLength < filteredAndSortedMerchants.length);
+                    return [...prev, ...nextBatch];
+                } else {
+                    setHasMore(false);
+                    return prev;
+                }
+            });
             setLoading(false);
+            isLoadingRef.current = false;
         }, 1000);
-    }, [loading, hasMore, displayedMerchants.length, filteredAndSortedMerchants]);
+    }, [loading, hasMore, filteredAndSortedMerchants]);
 
     const handleStatusChange = useCallback((status: MerchantStatus) => {
         setSelectedStatuses((prev) =>
@@ -103,7 +103,6 @@ export default function MerchantsTable() {
                 ? prev.filter((s) => s !== status)
                 : [...prev, status]
         );
-        // Reset pagination when filter changes
         setDisplayedMerchants(filteredAndSortedMerchants.slice(0, 10));
     }, [filteredAndSortedMerchants]);
 
@@ -113,20 +112,16 @@ export default function MerchantsTable() {
                 ? prev.filter((r) => r !== riskLevel)
                 : [...prev, riskLevel]
         );
-        // Reset pagination when filter changes
         setDisplayedMerchants(filteredAndSortedMerchants.slice(0, 10));
     }, [filteredAndSortedMerchants]);
 
     const handleSort = useCallback((field: SortField) => {
         if (sortField === field) {
-            // Toggle direction if same field
             setSortDirection((prev) => (prev === "asc" ? "desc" : "asc"));
         } else {
-            // Set new field with ascending direction
             setSortField(field);
             setSortDirection("asc");
         }
-        // Reset pagination when sort changes
         setDisplayedMerchants(filteredAndSortedMerchants.slice(0, 10));
     }, [sortField, filteredAndSortedMerchants]);
 
